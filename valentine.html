@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Will You Be My Valentine? 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffc3dd 0%, #ffb3d9 25%, #ffa3d5 50%, #ff93d1 75%, #ff83cd 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts background */
+        .heart-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.4);
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 192, 203, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 48px;
+            color: #ff1493;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .teddy-container {
+            margin: 30px 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .teddy {
+            font-size: 120px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+
+
+        .question {
+            font-size: 32px;
+            color: #ff1493;
+            margin: 30px 0;
+            font-weight: 700;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            min-height: 80px;
+        }
+
+        button {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(255, 20, 147, 0.4);
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, #cccccc, #999999);
+            color: white;
+        }
+
+        #noBtn:hover {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(150%) rotate(0deg); }
+            25% { transform: translateX(150%) rotate(-5deg); }
+            75% { transform: translateX(150%) rotate(5deg); }
+        }
+
+        /* Result screen */
+        .result {
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-heart {
+            font-size: 100px;
+            margin: 20px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .date-card {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
+        }
+
+        .date-card h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .date-details {
+            font-size: 24px;
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .date-icon {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 20, 147, 0.4);
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff1493;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" id="heartBg"></div>
+
+    <div class="container">
+        <!-- Question Screen -->
+        <div id="questionScreen">
+            <h1>💕 Emily 💕</h1>
+            
+            <div class="teddy-container">
+                <div class="teddy">🧸</div>
+            </div>
+
+            <div class="question">
+                Will you be my Valentine?
+            </div>
+
+            <div class="buttons">
+                <button id="yesBtn">Yes! 💖</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="resultScreen" class="hidden result">
+            <div class="success-heart">💕</div>
+            <h1>Yay! She said YES!</h1>
+            
+            <div class="date-card">
+                <h2>Our Valentine's Date</h2>
+                <div class="date-icon">🍽️</div>
+                <div class="date-details">
+                    <div>📅 Valentine's Day</div>
+                    <div>⏰ 7:00 PM - 9:00 PM</div>
+                    <div>🌹 Restaurant Date</div>
+                    <div>💑 Just You & Me</div>
+                </div>
+            </div>
+
+            <div style="font-size: 24px; color: #ff1493; margin-top: 20px;">
+                I can't wait! 💖
+            </div>
+
+            <button class="back-btn" id="backBtn">← Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createFloatingHearts() {
+            const heartBg = document.getElementById('heartBg');
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heartBg.appendChild(heart);
+            }
+        }
+
+        // Make the No button run away
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        
+        let noBtnClicks = 0;
+
+        noBtn.addEventListener('mouseover', function() {
+            // Generate random position anywhere on screen
+            const maxX = window.innerWidth - 200;
+            const maxY = window.innerHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            noBtnClicks++;
+            
+            // Make it even more frantic after multiple attempts
+            const container = document.querySelector('.buttons');
+            const maxX = window.innerWidth - 200;
+            const maxY = window.innerHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+            
+            // Shrink the No button with each attempt
+            if (noBtnClicks > 3) {
+                const newSize = Math.max(0.3, 1 - (noBtnClicks * 0.1));
+                noBtn.style.transform = `scale(${newSize}) rotate(` + (Math.random() * 360) + 'deg)';
+            }
+        });
+
+        // Yes button functionality
+        yesBtn.addEventListener('click', function() {
+            document.getElementById('questionScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.remove('hidden');
+            
+            // Create confetti
+            createConfetti();
+        });
+
+        // Back button functionality
+        const backBtn = document.getElementById('backBtn');
+        backBtn.addEventListener('click', function() {
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            
+            // Reset the No button position
+            noBtn.style.position = 'relative';
+            noBtn.style.left = 'auto';
+            noBtn.style.top = 'auto';
+            noBtn.style.transform = 'scale(1)';
+            noBtnClicks = 0;
+        });
+
+        function createConfetti() {
+            const colors = ['#ff1493', '#ff69b4', '#ffc0cb', '#ff6b9d', '#ffb3d9'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Initialize
+        createFloatingHearts();
+    </script>
+</body>
+</html>
